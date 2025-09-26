@@ -1,0 +1,69 @@
+# --- Компиляторные артефакты ---
+*.o
+*.obj
+*.lo
+*.la
+*.al
+*.libs
+*.so
+*.so.*
+*.a
+*.lib
+*.dll
+*.dylib
+*.exe
+*.out
+*.app
+
+# --- Каталоги сборки ---
+build/
+Build/
+bin/
+Bin/
+lib/
+Lib/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+makefile
+
+# --- CLion, JetBrains ---
+.idea/
+*.iml
+
+# --- VSCode ---
+.vscode/
+*.code-workspace
+
+# --- Qt Creator ---
+*.pro.user
+*.qmake.stash
+
+# --- CTest / GTest / Coverage ---
+Testing/
+test_detail.xml
+*.gcno
+*.gcda
+*.gcov
+coverage/
+
+# --- Конфигурации и временные файлы ---
+*.log
+*.tmp
+*.temp
+*.swp
+*.DS_Store
+*.directory
+
+# --- Резервные файлы ---
+*~
+*.bak
+*.old
+*.orig
+
+# --- Прочее ---
+compile_commands.json
+.vs/                # Visual Studio
+*.sln
+*.vcxproj*
