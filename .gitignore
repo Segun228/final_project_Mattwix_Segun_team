@@ -67,3 +67,12 @@ compile_commands.json
 .vs/                # Visual Studio
 *.sln
 *.vcxproj*
+
+# --- Генерируемые отчеты ---
+report.txt
+report.csv
+report.json
+*.txt
+*.csv
+*.json
+reports/           # Каталог для отчетов, если будет создан
