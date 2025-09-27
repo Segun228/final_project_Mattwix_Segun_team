@@ -117,7 +117,7 @@ class User {
         }
 };
 
-// tests
+
 int main () {
     User u("Alice");
 
