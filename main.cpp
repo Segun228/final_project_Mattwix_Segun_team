@@ -113,14 +113,51 @@ int main() {
         }
 
         case 5: {
-            std::cout << "\nОТЧЕТ (ПОЛИМОРФИЗМ):\n";
+            std::cout << "\nОТЧЕТЫ (ПОЛИМОРФИЗМ):\n";
             
-            // Создаем разные типы отчетов через полиморфизм
-            std::vector<std::shared_ptr<Reports::Report>> reports;
-            reports.push_back(std::make_shared<Reports::TextReport>("Отчет"));
+            // Создаем тестовые транзакции
+            auto account = user.getAccounts()[0];
+            auto incomeCategory = user.getCategories()[1];  // Зарплата
+            auto expenseCategory = user.getCategories()[0]; // Продукты
+
+            std::vector<std::shared_ptr<Transactions::Transaction>> transactions;
             
-            std::cout << "Генерация отчета...\n";
-            reports[0]->generate(); // Полиморфный вызов
+            // Добавляем разные типы транзакций
+            transactions.push_back(std::make_shared<Transactions::DepositTransaction>(
+                50000, "Зарплата за месяц", incomeCategory, account));
+                
+            transactions.push_back(std::make_shared<Transactions::WithdrawalTransaction>(
+                1500, "Продукты в магазине", expenseCategory, account));
+                
+            transactions.push_back(std::make_shared<Transactions::CompoundingTransaction>(
+                10000, "Начисление процентов", 30, 5.0, nullptr, account));
+
+            // Демонстрация разных форматов отчетов
+            std::cout << "\n1. Текстовый отчет:\n";
+            auto textReport = std::make_shared<Reports::TextReport>("Ежемесячный отчет");
+            for(const auto& trans : transactions) {
+                textReport->addTransaction(trans);
+            }
+            textReport->generate();
+            
+            std::cout << "\n2. CSV отчет:\n";
+            auto csvReport = std::make_shared<Reports::CSVReport>("Ежемесячный отчет");
+            for(const auto& trans : transactions) {
+                csvReport->addTransaction(trans);
+            }
+            csvReport->generate();
+            
+            std::cout << "\n3. JSON отчет:\n";
+            auto jsonReport = std::make_shared<Reports::JSONReport>("Ежемесячный отчет");
+            for(const auto& trans : transactions) {
+                jsonReport->addTransaction(trans);
+            }
+            jsonReport->generate();
+            
+            // Сохранение отчетов в файлы
+            textReport->saveToFile("report.txt");
+            csvReport->saveToFile("report.csv");
+            jsonReport->saveToFile("report.json");
             break;
         }
 
