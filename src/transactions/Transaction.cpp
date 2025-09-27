@@ -2,6 +2,7 @@
 #include "../categories/Category.h"
 #include "../accounts/Account.h"
 #include "../utils/DateUtils.h"
+#include <cmath>
 
 namespace Transactions {
 
