@@ -11,6 +11,10 @@ class Account;
 
 namespace Transactions {
 
+/**
+ * @brief Интерфейс класса обобщенной транзакции
+ * 
+ */
 class Transaction {
 protected:
     double amount;
@@ -42,6 +46,10 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Transaction& t);
 };
 
+/**
+ * @brief Интерфейс класса транзакции пополнения
+ * 
+ */
 class DepositTransaction : public Transaction {
 public:
     DepositTransaction(
@@ -55,6 +63,10 @@ public:
     std::string getType() const override { return "DEPOSIT"; }
 };
 
+/**
+ * @brief Интерфейс класса транзакции снятия
+ * 
+ */
 class WithdrawalTransaction : public Transaction {
 public:
     WithdrawalTransaction(
@@ -68,6 +80,10 @@ public:
     std::string getType() const override { return "WITHDRAWAL"; }
 };
 
+/**
+ * @brief Интерфейс класса транзакции компаудирования
+ * 
+ */
 class CompoundingTransaction : public Transaction {
 private:
     int period;

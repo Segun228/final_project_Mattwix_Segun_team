@@ -4,7 +4,12 @@
 #include <sstream>
 
 namespace Reports {
-
+/**
+ * @brief Метод получения всех доходов
+ * 
+ * 
+ * @return double 
+ */
 double Report::getTotalIncome() const {
     double total = 0;
     for (const auto& trans : transactions) {
@@ -15,6 +20,11 @@ double Report::getTotalIncome() const {
     return total;
 }
 
+/**
+ * @brief Метод получения всех расходов
+ * 
+ * @return double 
+*/
 double Report::getTotalExpenses() const {
     double total = 0;
     for (const auto& trans : transactions) {
@@ -25,11 +35,19 @@ double Report::getTotalExpenses() const {
     return total;
 }
 
+/**
+ * @brief Получение текущего балланса
+ * 
+ * @return double 
+ */
 double Report::getNetBalance() const {
     return getTotalIncome() + getTotalExpenses();
 }
 
-// TextReport реализация
+/**
+ * @brief Реализация метода вывода текстового отчета в терминал
+ * 
+ */
 void TextReport::generate() const {
     std::cout << "=== " << title << " ===\n";
     std::cout << "Format: " << getFormat() << "\n";
@@ -45,6 +63,10 @@ void TextReport::generate() const {
     std::cout << "Net Balance: " << getNetBalance() << "\n";
 }
 
+/**
+ * @brief Реализация метода вывода текстового отчета в файл
+ * 
+ */
 void TextReport::saveToFile(const std::string& filename) const {
     std::ofstream file(filename);
     if (file.is_open()) {
@@ -65,7 +87,10 @@ void TextReport::saveToFile(const std::string& filename) const {
     }
 }
 
-// CSVReport реализация
+/**
+ * @brief Реализация метода вывода CSV отчета в терминал
+ * 
+ */
 void CSVReport::generate() const {
     std::cout << "Date,Type,Account,Category,Amount,Description\n";
     for (const auto& trans : transactions) {
@@ -78,6 +103,10 @@ void CSVReport::generate() const {
     }
 }
 
+/**
+ * @brief Реализация метода вывода CSV отчета в файл
+ * 
+ */
 void CSVReport::saveToFile(const std::string& filename) const {
     std::ofstream file(filename);
     if (file.is_open()) {
@@ -95,7 +124,10 @@ void CSVReport::saveToFile(const std::string& filename) const {
     }
 }
 
-// JSONReport реализация
+/**
+ * @brief Реализация метода экранирования служебных символов JSON
+ * 
+ */
 std::string JSONReport::escapeJson(const std::string& str) const {
     std::stringstream ss;
     for (char c : str) {
@@ -113,6 +145,10 @@ std::string JSONReport::escapeJson(const std::string& str) const {
     return ss.str();
 }
 
+/**
+ * @brief Реализация метода вывода JSON отчета в терминал
+ * 
+ */
 void JSONReport::generate() const {
     std::cout << "{\n";
     std::cout << "  \"title\": \"" << escapeJson(title) << "\",\n";
@@ -140,6 +176,10 @@ void JSONReport::generate() const {
     std::cout << "}\n";
 }
 
+/**
+ * @brief Реализация метода вывода JSON отчета в файл
+ * 
+ */
 void JSONReport::saveToFile(const std::string& filename) const {
     std::ofstream file(filename);
     if (file.is_open()) {
@@ -171,18 +211,6 @@ void JSONReport::saveToFile(const std::string& filename) const {
         file.close();
         std::cout << "JSON report saved to: " << filename << std::endl;
     }
-}
-
-// XLSXReport реализация (заглушка)
-void XLSXReport::generate() const {
-    std::cout << "XLSX Report: " << title << "\n";
-    std::cout << "This would generate an Excel file with " 
-              << transactions.size() << " transactions\n";
-}
-
-void XLSXReport::saveToFile(const std::string& filename) const {
-    std::cout << "XLSX report simulation saved to: " << filename << std::endl;
-    std::cout << "In real implementation, this would create an Excel file\n";
 }
 
 } // namespace Reports

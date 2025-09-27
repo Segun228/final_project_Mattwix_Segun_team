@@ -6,7 +6,10 @@
 #include "../transactions/Transaction.h"
 
 namespace Reports {
-
+/**
+ * @brief Интерфейс класса отчета
+ * 
+ */
 class Report {
 protected:
     std::string title;
@@ -39,6 +42,10 @@ public:
     double getNetBalance() const;
 };
 
+/**
+ * @brief Интерфейс класса текстового отчета
+ * 
+ */
 class TextReport : public Report {
 public:
     TextReport(const std::string& t) : Report(t) {}
@@ -48,6 +55,10 @@ public:
     std::string getFormat() const override { return "TEXT"; }
 };
 
+/**
+ * @brief Интерфейс класса CSV отчета
+ * 
+ */
 class CSVReport : public Report {
 public:
     CSVReport(const std::string& t) : Report(t) {}
@@ -57,6 +68,10 @@ public:
     std::string getFormat() const override { return "CSV"; }
 };
 
+/**
+ * @brief Интерфейс класса JSON отчета
+ * 
+ */
 class JSONReport : public Report {
 private:
     std::string escapeJson(const std::string& str) const;
@@ -67,16 +82,6 @@ public:
     void generate() const override;
     void saveToFile(const std::string& filename) const override;
     std::string getFormat() const override { return "JSON"; }
-};
-
-// Заглушка для XLSX - в реальном проекте использовалась бы библиотека типа libxlsxwriter
-class XLSXReport : public Report {
-public:
-    XLSXReport(const std::string& t) : Report(t) {}
-
-    void generate() const override;
-    void saveToFile(const std::string& filename) const override;
-    std::string getFormat() const override { return "XLSX"; }
 };
 
 } // namespace Reports
