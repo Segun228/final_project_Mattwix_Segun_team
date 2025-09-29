@@ -13,9 +13,9 @@
  * Управляет списками счетов и категорий через умные указатели.
  */
 class User {
-    std::string name;                                    ///< Имя пользователя
-    std::vector<std::shared_ptr<Account>> accounts;      ///< Список счетов пользователя
-    std::vector<std::shared_ptr<Category>> categories;   ///< Список категорий пользователя
+    std::string name;
+    std::vector<std::shared_ptr<Account>> accounts;
+    std::vector<std::shared_ptr<Category>> categories;
 
 public:
     /**

@@ -25,7 +25,6 @@ int main() {
     
     User user("Alice");
 
-    // 1. КЛАССЫ + НАСЛЕДОВАНИЕ + ПОЛИМОРФИЗМ
     user.addCategory(std::make_shared<ExpenseCategory>("Продукты", 5000));
     user.addCategory(std::make_shared<IncomeCategory>("Зарплата"));
     user.addCategory(std::make_shared<Category>("Разное"));
@@ -45,14 +44,13 @@ int main() {
         std::cout << "0. Выход\n";
         std::cout << "Выбор: ";
         
-        // Безопасное считывание числа
         if (!(std::cin >> choice)) {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Неверный ввод! Попробуйте снова.\n";
             continue;
         }
-        std::cin.ignore(); // Очищаем буфер от символа новой строки
+        std::cin.ignore();
 
         if (choice == 0) {
             std::cout << "\nСпасибо за использование программы!\n";
@@ -63,7 +61,7 @@ int main() {
         case 1: {
             std::cout << "\nСЧЕТА (ПОЛИМОРФИЗМ + ОПЕРАТОР <<):\n";
             for (const auto& acc : user.getAccounts()) {
-                std::cout << *acc << "\n";  // Перегрузка оператора
+                std::cout << *acc << "\n";
             }
             break;
         }
